@@ -3,6 +3,7 @@ from .import main
 
 
 
+
 # Views
 @main.route('/')
 def index():
@@ -11,6 +12,8 @@ def index():
     View root page function that returns the index page and its data
     '''
     title = 'Home-PITCHperfect'
+    #review by category
+    
     return render_template( 'index.html',title=title)
 
     
