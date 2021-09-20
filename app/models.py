@@ -1,6 +1,6 @@
 from .import db
-from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
+from datetime import datetime
 from flask_login import UserMixin
 from . import login_manager
 
@@ -18,8 +18,12 @@ class User(UserMixin,db.Model):
 
     bio = db.Column(db.String(5000))
     profile_pic_path = db.Column(db.String)
-    pass_secure = db.Column(db.String(255))
-    
+    pass_secure = db.Column(db.String(255))       
+    date_joined = db.Column(db.DateTime,default=datetime.utcnow)
+
+    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
+
+    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
 
     @property
     def password(self):
@@ -33,13 +37,6 @@ class User(UserMixin,db.Model):
     def verify_password(self,password):
             return check_password_hash(self.pass_secure,password)
 
-            
-    date_joined = db.Column(db.DateTime,default=datetime.utcnow)
-    pitches = db.relationship('Pitch',backref = 'user',lazy = "dynamic")
-
-    comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
-
-    
 
 
     def __repr__(self):

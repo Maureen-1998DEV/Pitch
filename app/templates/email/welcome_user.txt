@@ -1,0 +1,2 @@
+Hello {{user.username}}
+Welcome to pitchPERFECT ,welcome to this amaizing website that allows you to exchange pitches about interview,promotion and production.We officially welcome you to our family.
