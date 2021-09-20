@@ -1,5 +1,7 @@
 from flask import render_template
 from .import main
+from ..models import Pitch
+
 
 
 
@@ -13,7 +15,12 @@ def index():
     '''
     title = 'Home-PITCHperfect'
     #review by category
-    
-    return render_template( 'index.html',title=title)
+    pitches_interview = Pitch.get_pitches('interview')
+    pitches_product = Pitch.get_pitches('product')
+    pitches_promotion = Pitch.get_pitches('promotion')
+
+
+    return render_template('index.html',title = title, interview =pitches_interview , product = pitches_product, promotion = pitches_promotion)
+
 
     
