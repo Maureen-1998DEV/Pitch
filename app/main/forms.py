@@ -9,7 +9,7 @@ class PitchForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class UpdateProfile(FlaskForm):
-    bio = TextAreaField('want to know you more',validators = [Required()])
+    bio = TextAreaField('know more ',validators = [Required()])
     submit = SubmitField('Submit')
 
 class CommentForm(FlaskForm):

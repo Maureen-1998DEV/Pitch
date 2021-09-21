@@ -4,6 +4,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from . import login_manager
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -27,6 +28,7 @@ class User(UserMixin,db.Model):
 
     comments = db.relationship('Comment',backref = 'user',lazy = "dynamic")
 
+
     @property
     def password(self):
             raise AttributeError('You cannot read the password attribute')
@@ -38,8 +40,7 @@ class User(UserMixin,db.Model):
 
     def verify_password(self,password):
             return check_password_hash(self.pass_secure,password)
-
-
+    
 
     def __repr__(self):
         return f'User {self.username}'
@@ -55,17 +56,18 @@ class Role(db.Model):
         return f'User {self.name}'
 
 class Pitch(db.Model):
-    __tablename__ = 'pitch'
+    __tablename__ = 'pitches'
     id = db.Column(db.Integer,primary_key = True)
     title_pitch = db.Column(db.String(255)) 
     content_pitch = db.Column(db.String(500)) 
     category = db.Column(db.String)
-    post = db.Column(db.DateTime,default=datetime.utcnow) 
+    posted = db.Column(db.DateTime,default=datetime.utcnow) 
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
     likes = db.Column(db.Integer)
     dislikes = db.Column(db.Integer) 
 
     comments = db.relationship('Comment',backref ='pitch_id',lazy = "dynamic")
+
     def save_pitch(self):
       db.session.add(self)
       db.session.commit()
@@ -98,12 +100,13 @@ class Comment(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     Comment = db.Column(db.String(100))
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
+    pitch = db.Column(db.Integer,db.ForeignKey("pitches.id"))
     def save_comment(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
     def get_comment(cls,pitch):
-        comment = Comment.query.filter_by (pitch_id=pitch).all()
-        return comment
+        comments = Comment.query.filter_by (pitch_id=pitch).all()
+        return comments
  
