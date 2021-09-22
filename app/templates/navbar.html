@@ -12,9 +12,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
-                <li><a href="/">Pitch</a></li>
-                <li><a href="/">Production</a></li>
-                <li><a href="/">promotion</a></li>          
+                <li><a href="{{url_for('main.interview_pitches')}}">Pitch</a></li>
+                <li><a href="{{url_for('main.product_pitches')}}">Production</a></li>
+                <li><a href="{{url_for('main.promotion_pitches')}}">promotion</a></li>          
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}

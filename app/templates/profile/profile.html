@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-{%import 'macros.html' as macro%}
+
 
 {% block content %}
 <div class="container">
@@ -30,10 +30,18 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-              <h3> Pitches </h3>
-              <br>
-               {{macro.displayPitches(pitches)}}
-            </div>
+                <h3> Bio </h3>
+
+                <!-- user bio-->
+                {% if user.bio %}
+                  <p> {{user.bio}}</p>
+                {%else%}
+                  <p> {{user.username| capitalize}} has no bio </p>
+                {% endif %}
+      
+                {% if user == current_user %}
+                <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+                {% endif %}
         </div>
     </div>
 </div>
