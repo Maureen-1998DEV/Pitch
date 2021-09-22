@@ -78,14 +78,14 @@ def new_pitch():
         category = pitch_form.category.data
 
         # Updated pitch 
-        new_pitch = Pitch(pitch_title=title,pitch_content=pitch,category=category,user=current_user,likes=0,dislikes=0)
+        new_pitch = Pitch(title_pitch=title,content_pitch=pitch,category=category,user=current_user,likes=0,dislikes=0)
 
         # Save pitch 
         new_pitch.save_pitch()
         return redirect(url_for('.index'))
 
     title = 'New pitch'
-    return render_template('new_pitch.html',title = title,pitch_form=pitch_form )
+    return render_template('newpitch.html',title = title,pitch_form=pitch_form )
 
 
 @main.route('/pitches/pitches_promotion')
@@ -133,14 +133,14 @@ def pitch(id):
 
     comment_form = CommentForm()
     if comment_form.validate_on_submit():
-        comment = comment_form.text.data
+        comment= comment_form.text.data
 
-        new_comment = Comment(comment = comment,user = current_user,pitch_id = pitch)
+        new_comment = Comment(content_commit = comment,user = current_user,pitch_id = pitch)
 
         new_comment.save_comment()
 
 
-    comments = Comment.get_comments(pitch)
+    comments = Comment.get_comment(pitch)
 
     return render_template("pitch.html", pitch = pitch, comment_form = comment_form, comments = comments, date = posted_date)
 

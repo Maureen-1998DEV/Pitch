@@ -1,4 +1,4 @@
-SECRET_KEY=maureen3344
+export SECRET_KEY='thisIsarandomkey'
 export MAIL_USERNAME='maureen.ougo@student.moringaschool.com'
 export MAIL_PASSWORD='MAUREEN1998AKINYI28'
 
